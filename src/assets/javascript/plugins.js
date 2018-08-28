@@ -69,6 +69,32 @@ let Plugins = {
         }
     },
 
+    /**
+     * 生活指数类型
+     */
+    liseStyleName: (type) => {
+        switch (type) {
+            case 'comf':
+                return '舒适度指数';
+            case 'drsg':
+                return '穿衣指数';
+            case 'flu':
+                return '感冒指数';
+            case 'sport':
+                return '运动指数';
+            case 'trav':
+                return '旅游指数';
+            case 'uv':
+                return '紫外线指数';
+            case 'cw':
+                return '洗车指数';
+            case 'air':
+                return '空气污染扩散条件指数';
+        
+            default:
+                break;
+        }
+    },
 
     /**
      * 获取当前时间，格式YYYY-MM-DD

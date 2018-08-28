@@ -103,8 +103,8 @@ class Air extends Component {
                             )
                         })
                     }
+                    <div className='clearfix'></div>
                 </div>
-
             </div>
         );
     }

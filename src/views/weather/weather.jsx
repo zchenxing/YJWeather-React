@@ -61,20 +61,22 @@ class Weather extends Component {
     }
 
     render() {
-        let bg_img = `url(${require('assets/images/bg-sun.jpg')})`;
+        let bg_img = `url(${require('assets/images/bg-sun.png')})`;
         let time = new Date().getHours()
 
         if (time >= 18 || time <= 7) {
-            bg_img = `url(${require('assets/images/bg-night.jpg')})`
+            bg_img = `url(${require('assets/images/bg-night.png')})`
         }
 
         return (
             <div className='full-screen weather'>
                 <div className='weather-bg' style={{backgroundImage: bg_img}}></div>
                 <Now />
-                <Tmp />
-                <Air />
-                <Life />
+                <div className='weather-info'>
+                    <Tmp />
+                    <Air />
+                    <Life />
+                </div>
             </div>
         );
     }
