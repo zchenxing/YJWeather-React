@@ -39,8 +39,40 @@ let Plugins = {
         return dateTime
     },
 
+    /**
+     * 根据aqi空气指数返回yanse
+     */
+    aqiColor: (aqi) => {
 
-    //获取当前时间，格式YYYY-MM-DD
+        aqi = parseInt(aqi)
+
+        if (aqi < 50) {
+            return '#76BA51'
+        }
+        else if (aqi >= 50 && aqi < 100) {
+            return '#E3B151'
+        }
+        else if (aqi >= 100 && aqi < 150) {
+            return '#FB9B5D'
+        }
+        else if (aqi >= 150 && aqi < 200) {
+            return '#F07754'
+        }
+        else if (aqi >= 200 && aqi < 250) {
+            return '#A94258'
+        }
+        else if (aqi >= 250 && aqi < 300) {
+            return '#7A203D'
+        }
+        else if (aqi >= 300) {
+            return '#50131e'
+        }
+    },
+
+
+    /**
+     * 获取当前时间，格式YYYY-MM-DD
+     */
     getNowFormatDate: () => {
         var date = new Date();
         var seperator1 = "-";

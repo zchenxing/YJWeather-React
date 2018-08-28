@@ -7,9 +7,9 @@ class Now extends Component {
         super(props);
 
         this.state = {
-            tmp_icon: require('../../assets/images/icon/tmp.png'),
-            hum_icon: require('../../assets/images/icon/hum.png'),
-            wind_icon: require('../../assets/images/icon/wind-dir.png')
+            tmp_icon: require('assets/images/icon/tmp.png'),
+            hum_icon: require('assets/images/icon/hum.png'),
+            wind_icon: require('assets/images/icon/wind-dir.png')
         }
     }
     

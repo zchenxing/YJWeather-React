@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { setWeatherData } from '../../redux/action'
+import { setWeatherData, setAirData } from '../../redux/action'
 import { connect } from 'react-redux'
-import Now from './now'
-import Tmp from './tmp'
+import Now from './tmp/now'
+import Tmp from './tmp/tmp'
+import Air from './air/air'
+import Life from './life/life'
 import client from '../../restful'
 import './weather.less'
 
-import Plugins from '../../assets/javascript/plugins'
+import Plugins from 'assets/javascript/plugins'
 
 class Weather extends Component {
 
@@ -16,28 +18,29 @@ class Weather extends Component {
     }
 
     componentWillMount() {
-        this._request()
+        this._tmpRequest();
+        this._airRequest();
     }
 
 
-    _request() {
+    _tmpRequest() {
         client.getWeath('/weather?location=成都').then((res) => {
 
-            let dataSource = res.HeWeather6[0]
+            let weath = res.HeWeather6[0]
 
-            dataSource.hourly = dataSource.hourly.map((el) => {
+            weath.hourly = weath.hourly.map((el) => {
                 el.icon = Plugins.getWeatherIcon(el.cond_code, el.time)
                 return el
             })
 
-            dataSource.daily_forecast = dataSource.daily_forecast.map((el) => {
+            weath.daily_forecast = weath.daily_forecast.map((el) => {
                 el.icon_d = Plugins.getWeatherIcon(el.cond_code_d, '10:00')
                 el.icon_n = Plugins.getWeatherIcon(el.cond_code_n, '22:00')
                 return el
             })
 
             if(this.props.submitWeather) {
-                this.props.submitWeather(res.HeWeather6[0])
+                this.props.submitWeather(weath)
             }
 
         }).catch((err) => {
@@ -45,14 +48,33 @@ class Weather extends Component {
         })
     }
 
+    _airRequest() {
+      
+        client.getWeath('/air?location=成都').then(res => {
+            let air = res.HeWeather6[0]
+            if(this.props.submitAir) {
+                this.props.submitAir(air)
+            }
+        }).catch(err => { 
+            console.log(err)
+        })
+    }
+
     render() {
-        const bg_sun = `url(${require('../../assets/images/bg-sun.jpg')})`;
-        const bg_night = `url(${require('../../assets/images/bg-night.jpg')})`;
+        let bg_img = `url(${require('assets/images/bg-sun.jpg')})`;
+        let time = new Date().getHours()
+
+        if (time >= 18 || time <= 7) {
+            bg_img = `url(${require('assets/images/bg-night.jpg')})`
+        }
 
         return (
-            <div className='full-screen weather-bg' style={{backgroundImage: bg_sun}}>
+            <div className='full-screen weather'>
+                <div className='weather-bg' style={{backgroundImage: bg_img}}></div>
                 <Now />
                 <Tmp />
+                <Air />
+                <Life />
             </div>
         );
     }
@@ -70,6 +92,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         submitWeather: (weather) => {
             dispatch(setWeatherData(weather))
+        },
+        submitAir: (air) => {
+            dispatch(setAirData(air))
         }
     }
 }

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import Plugins from '../../assets/javascript/plugins'
+import Plugins from 'assets/javascript/plugins'
 
 class TodayTmp extends Component {
 
     constructor(props) {
         super(props);
     }
-    
 
     render() {
 
