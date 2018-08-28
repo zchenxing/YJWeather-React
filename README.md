@@ -19,12 +19,39 @@ YJWeather 是一款简单天气预报应用，项目基于 React 框架。
 - [x] 实时天气
 - [x] 逐小时天气
 - [x] 最近3天的天气
+- [x] 空气质量指数
+- [x] 生活指数
 - [ ] 城市管理
 - [ ] 热点新闻
 
 
-## install & run
+## install
 - Clone this repo `git clone https://github.com/zyj7815/YJWeather-React.git`
 - cd `YJWeather-React`
 - run `npm install`
+- 在`node_modules`中，找到`react-scripts`的`webpack.config.xx.js`(生产和开发环境)，引入less
+```
+module: {
+    rules: [
+        {            
+            test: /\.(css|less)$/
+            use:
+            {
+                ...
+                loader: require.resolve('less-loader')
+            }
+        }
+    ]
+}
+
+// 配置文件路径别名
+resolve: {
+    alias: {
+        'assets': path.resolve(__dirname, '../../../src/assets'),
+    }
+}
+```
+- `config`目录下保存的[和风天气](https://www.heweather.com/)的`API-key`。在`restful`目录中引用过，如需正常运行项目，可以在此修改`key`值。
+
+## run
 - `npm start`
