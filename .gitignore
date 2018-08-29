@@ -5,6 +5,9 @@
 
 /config/index.js
 
+*.tar
+/build
+
 # testing
 /coverage
 
